@@ -1,0 +1,27 @@
+package ar156;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author root
+ */
+public class AR156 {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int origen;
+        int destino;
+        int contador;
+        while ((origen = in.nextInt()) >= 0) {
+            contador = 0;
+            while ((destino = in.nextInt()) != -1) {
+                    contador += Math.abs(origen - destino);
+                origen = destino;
+            }
+            System.out.println(contador);
+        }
+    }
+
+}
+
