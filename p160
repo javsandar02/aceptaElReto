@@ -1,0 +1,63 @@
+package ar160;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Scanner;
+
+public class AR160 {
+
+    public static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    public static Scanner in = new Scanner(System.in);
+
+    public static int readInt() throws IOException {
+        int n1 = System.in.read() - 48;
+        int n2 = System.in.read();
+        while (n2 != 10 && n2 != 32) {
+            n1 = n1 * 10 + (n2 - 48);
+            n2 = System.in.read();
+        }
+        return n1;
+    }
+
+    private static boolean checkArriba(int[][] matriz) {
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = i + 1; j < matriz[0].length; j++) {
+                if (matriz[i][j] != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private static boolean checkAbajo(int[][] matriz) {
+        for (int i = matriz.length - 1; i > -1; i--) {
+            for (int j = i - 1; j > -1; j--) {
+                if (matriz[i][j] != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) throws IOException {
+        int n;
+        while ((n = readInt()) != 0) {
+            int[][] matriz = new int[n][n];
+            for (int i = 0; i < matriz.length; i++) {
+                for (int j = 0; j < matriz[0].length; j++) {
+                    matriz[i][j] = readInt();
+                }
+            }
+            if (checkArriba(matriz) || checkAbajo(matriz)) {
+                bw.write("SI\n");
+            } else {
+                bw.write("NO\n");
+            }
+        }
+        bw.flush();
+    }
+
+}
