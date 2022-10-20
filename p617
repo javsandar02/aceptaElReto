@@ -1,0 +1,33 @@
+package spaceinvaders;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+public class SpaceInvaders {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int casos = Integer.valueOf(br.readLine());
+        while (casos > 0) {
+            casos--;
+            int puntuaciones = Integer.valueOf(br.readLine());
+            String[] siglas = new String[puntuaciones];
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < puntuaciones; i++) {
+                siglas[i] = String.valueOf(br.readLine());
+            }
+            for (int i = 0; i < 3; i++) {
+                for (String array1 : siglas) {
+                    sb.append(array1.charAt(i));
+                }
+            }
+            bw.write(String.valueOf(sb) + "\n");
+        }
+        System.gc();
+        bw.flush();
+    }
+}
