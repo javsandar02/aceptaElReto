@@ -1,0 +1,46 @@
+package persistenciamultiplicativa;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+public class PersistenciaMultiplicativa {
+
+    private static int longitudN(int n) {
+        if (n < 10) {
+            return 1;
+        } else {
+            return 1 + longitudN(n / 10);
+        }
+    }
+
+    //39 --> 9*3=27 --> 7*2 = 14 --> 4*1 = 4;   
+    private static int persistencia(int n) {
+        int persistencia = 0;
+        int longitud;
+        int multiplicacion;
+        while ((longitud = longitudN(n)) != 1) {
+            persistencia++;
+            multiplicacion = 1;
+            for (int i = 0; i < longitud; i++) {
+                multiplicacion *= n % 10;
+                n /= 10;
+            }
+            n = multiplicacion;
+        }
+        return persistencia;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int casos = Integer.valueOf(br.readLine());
+        for (int i = 0; i < casos; i++) {
+            bw.write(String.valueOf(persistencia(Integer.valueOf(br.readLine()))) + "\n");
+        }
+        bw.close();
+    }
+
+}
