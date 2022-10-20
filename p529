@@ -1,0 +1,44 @@
+package ar529;
+
+import java.util.Scanner;
+
+public class AR529 {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int casos = in.nextInt();
+
+        for (; casos > 0; casos--) {
+            int user = 0;
+            int max = 0;
+            int min = 0;
+            String logs = in.next();
+            for (int j = 0; j < logs.length(); j++) {
+                switch (logs.charAt(j)) {
+                    case 'I':
+                        user++;
+                        break;
+                    case 'O':
+                        user--;
+                        break;
+                }
+                if (user < 0) {
+                    min = user;
+                }
+                if (user > max) {
+                    max = user;
+                }
+            }
+            if (min < 0) {
+                min *= -1;
+                min++;
+            }
+            if (min > max) {
+                System.out.println(min);
+            } else {
+                System.out.println(max);
+            }
+
+        }
+    }
+}
