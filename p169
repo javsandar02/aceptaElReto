@@ -1,0 +1,58 @@
+package ar169;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Scanner;
+
+/**
+ *
+ * @author javsandar
+ */
+public class AR169 {
+
+    public static int readInt() throws IOException {
+        int n1 = System.in.read() - 48;
+        int n2 = System.in.read();
+        while (n2 != 10 && n2 != 32) {
+            n1 = n1 * 10 + (n2 - 48);
+            n2 = System.in.read();
+        }
+        return n1;
+    }
+
+    public static void main(String[] args) throws IOException {
+        Scanner in = new Scanner(System.in);
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        HashMap<String, Integer> ciclistas = new HashMap();
+        int numCiclistas, hermanos;
+        String ciclista, apellido;
+
+        for (int i = readInt(); i > 0; i--) {
+            ciclistas.clear();
+            numCiclistas = 0;
+            hermanos = 0;
+            while (!(ciclista = in.nextLine()).equals("====")) {
+                numCiclistas++;
+                apellido = ciclista.substring(0, ciclista.indexOf(",")).toLowerCase();
+                if (ciclistas.containsKey(apellido)) {
+                    ciclistas.put(apellido, ciclistas.get(apellido) + 1);
+                } else {
+                    ciclistas.put(apellido, 1);
+                }
+            }
+            Iterator it = ciclistas.keySet().iterator();
+            while (it.hasNext()) {
+                int valor = ciclistas.get(it.next());
+                if (valor > 1) {
+                    hermanos += valor;
+                }
+            }
+            bw.write(numCiclistas + " " + hermanos + "\n");
+        }
+        bw.flush();
+    }
+
+}
