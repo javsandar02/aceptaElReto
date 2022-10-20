@@ -1,0 +1,36 @@
+package ar525;
+
+import java.util.Scanner;
+
+public class Ar525 {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int casos = in.nextInt();
+
+        int inicio1, final1, inicio2, final2, temp;
+
+        while (casos > 0) {
+            inicio1 = in.nextInt();
+            final1 = in.nextInt();
+            inicio2 = in.nextInt();
+            final2 = in.nextInt();
+            if (inicio1 > final1) {
+                temp = inicio1;
+                inicio1 = final1;
+                final1 = temp;
+            }
+            if (inicio2 > final2) {
+                temp = inicio2;
+                inicio2 = final2;
+                final2 = temp;
+            }
+            if (inicio1 >= final2 || final1 <= inicio2)
+                System.out.println("SEPARADOS");
+            else
+                System.out.println("SOLAPADOS");
+            casos--;
+        }
+    }
+
+}
