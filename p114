@@ -1,0 +1,25 @@
+package ar114;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class AR114 {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int factorial, numero, casos;
+        casos = Integer.valueOf(br.readLine());
+        for (; casos > 0; casos--) {
+            numero = Integer.valueOf(br.readLine());
+            factorial = 1;
+            while (numero > 1 && factorial != 0) {
+                factorial *= numero--;
+                factorial%=10;
+            }
+            System.out.println(factorial);
+
+        }
+    }
+
+}
