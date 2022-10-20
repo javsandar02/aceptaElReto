@@ -1,0 +1,38 @@
+package ar438;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
+/**
+ *
+ * @author javsandar
+ */
+public class AR438 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws IOException {
+        Scanner in = new Scanner(System.in);
+        while (in.hasNext()) {
+            String frase = in.nextLine();
+            char[] letras = frase.toCharArray();
+            int[] salida = new int[2];
+            for (int i = 0; i < letras.length; i++) {
+                if (Character.isLetter(letras[i])) {
+                    salida[0]++;
+                } else if (letras[i] == '!') {
+                    salida[1]++;
+                }
+            }
+            if (salida[0] >= salida[1]) {
+                System.out.println("escrito");
+            } else
+                System.out.println("ESGRITO");
+        }   
+        in.close();
+    }
+}
+
