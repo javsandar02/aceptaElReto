@@ -1,0 +1,70 @@
+package ar446;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Scanner;
+
+/**
+ *
+ * @author javsandar
+ */
+public class AR446 {
+
+    /**
+     * @param args the command line arguments
+     */
+    private static String readLine() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int c = System.in.read();
+        while (c != 32 && c != 10) {
+            sb.append((char) c);
+            c = System.in.read();
+        }
+        return sb.toString();
+    }
+
+    public static int readInt() throws IOException {
+        int n1 = System.in.read() - 48;
+        int n2 = System.in.read();
+        while (n2 != 10 && n2 != 32) {
+            n1 = n1 * 10 + (n2 - 48);
+            n2 = System.in.read();
+        }
+        return n1;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        int casos = readInt();
+        String nieto, ultimoNieto, nietoActual;
+        boolean abuelaFalsa;
+        int n;
+        for (int i = 0; i < casos; i++) {
+            nieto = readLine();
+            n = readInt();
+            abuelaFalsa = false;
+            if (n == 1) {
+                bw.write("FALSA\n");
+                readLine();
+            } else {
+                for (int j = 0; j < n - 1; j++) {
+                    nietoActual = readLine();
+                    if (nietoActual.equals(nieto)) {
+                        abuelaFalsa = true;
+                    }
+                }
+
+                ultimoNieto = readLine();
+                if (ultimoNieto.equals(nieto) && !abuelaFalsa) {
+                    bw.write("VERDADERA\n");
+                } else {
+                    bw.write("FALSA\n");
+                }
+            }
+            
+        }
+        bw.flush();
+    }
+}
+
