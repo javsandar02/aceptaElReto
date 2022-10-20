@@ -1,0 +1,50 @@
+package ar300;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Ar300 {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int entrada = Integer.valueOf(br.readLine());
+
+        boolean tieneA = false, tieneE = false, tieneI = false, tieneO = false, tieneU = false;
+        
+        for (int i = 0; i < entrada; i++) {
+            String palabra = String.valueOf(br.readLine());
+            for (int j = 0; j < palabra.length(); j++) {
+                switch (palabra.charAt(j)) {
+                    case 'a':
+                        tieneA = true;
+                        break;
+                    case 'e':
+                        tieneE = true;
+                        break;
+                    case 'i':
+                        tieneI = true;
+                        break;
+                    case 'o':
+                        tieneO = true;
+                        break;
+                    case 'u':
+                        tieneU = true;
+                        break;
+                }
+            }
+            if (tieneA && tieneE && tieneI && tieneO && tieneU) {
+                System.out.println("SI");
+            } else {
+                System.out.println("NO");
+            }
+            tieneA = false;
+            tieneE = false;
+            tieneI = false;
+            tieneO = false;
+            tieneU = false;
+
+        }
+
+    }
+}
