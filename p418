@@ -1,0 +1,55 @@
+package renum.pkg418;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
+/**
+ *
+ * @author javsandar
+ */
+public class RENUM418 {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        StringBuilder sb = new StringBuilder();
+        HashMap<Integer, Integer> map = new HashMap();
+        ArrayList<Integer> gos = new ArrayList();
+        ArrayList<Integer> tos = new ArrayList();
+        ArrayList<String> instrucciones = new ArrayList();
+        int n = in.nextInt(), numero, contador;
+        String instruccion;
+        while (n-- > 0) {
+            in.nextLine();
+            sb.setLength(0);
+            contador = 10;
+            map.clear();
+            gos.clear();
+            tos.clear();
+            instrucciones.clear();
+            while ((numero = in.nextInt()) != 0) {
+                map.put(numero, contador);
+                gos.add(numero);
+                instruccion = in.next();
+                instrucciones.add(instruccion);
+                if (!instruccion.equals("RETURN")) {
+                    tos.add(in.nextInt());
+                } else {
+                    tos.add(null);
+                }
+                contador += 10;
+            }
+            for (int i = 0; i < map.size(); i++) {
+                sb.append(map.get(gos.get(i))).append(" ").append(instrucciones.get(i));
+                if (map.get(tos.get(i)) != null) {
+                    sb.append(" ").append(map.get(tos.get(i)));
+                }
+                sb.append("\n");
+            }
+            System.out.print(sb);
+            System.out.println("---");
+        }
+    }
+
+}
+
