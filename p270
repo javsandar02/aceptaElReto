@@ -1,0 +1,71 @@
+package ar270;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Iterator;
+import java.util.TreeMap;
+
+/**
+ *
+ * @author javsandar
+ */
+public class AR270 {
+
+    public static int readInt() throws IOException {
+        int n1 = System.in.read() - 48;
+        int n2 = System.in.read();
+        while (n2 != 10 && n2 != 32) {
+            n1 = n1 * 10 + (n2 - 48);
+            n2 = System.in.read();
+        }
+        return n1;
+    }
+
+    private static String readLine() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int c = System.in.read();
+        while (c != 10) {
+            sb.append((char) c);
+            c = System.in.read();
+        }
+        return sb.toString();
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        TreeMap<String, Integer> alumnos = new TreeMap();
+        int n;
+        String alumno;
+        while ((n = readInt()) != 0) {
+            alumnos.clear();
+            for (; n > 0; n--) {
+                alumno = readLine();
+                String ejercicio = readLine();
+                if (alumnos.containsKey(alumno)) {
+                    if (ejercicio.equals("INCORRECTO")) {
+                        alumnos.put(alumno, alumnos.get(alumno) - 1);
+                    } else if (ejercicio.equals("CORRECTO")) {
+                        alumnos.put(alumno, alumnos.get(alumno) + 1);
+                    }
+                } else {
+                    alumnos.put(alumno, 0);
+                    if (ejercicio.equals("INCORRECTO")) {
+                        alumnos.put(alumno, -1);
+                    } else if (ejercicio.equals("CORRECTO")) {
+                        alumnos.put(alumno, 1);
+                    }
+                }
+            }
+            Iterator it = alumnos.keySet().iterator();
+            while (it.hasNext()) {
+                alumno = it.next().toString();
+                if (alumnos.get(alumno) != 0) {
+                    bw.write(alumno + ", " + alumnos.get(alumno) + "\n");
+                }
+            }
+            bw.write("---\n");
+        }
+        bw.flush();
+    }
+}
