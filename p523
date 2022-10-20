@@ -1,0 +1,61 @@
+package screadline;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
+/**
+ *
+ * @author javsandar
+ */
+public class SCreadLine {
+
+    /**
+     * @param args the command line arguments
+     */
+    private static String readLine() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int c = System.in.read();
+        while (c != 32 && c != 10) {
+            sb.append((char) c);
+            c = System.in.read();
+        }
+        return sb.toString();
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        short casos = Short.valueOf(readLine());
+        String m1, m2;
+        String l1, l2;
+        int modernos, antiguos;
+        int n1, n2;
+
+        for (int i = 0; i < casos; i++) {
+            modernos = 0;
+            antiguos = 0;
+            m1 = readLine();
+
+            while (!(m2 = readLine()).equals("0")) {
+                l1 = m1.substring(4);
+                l2 = m2.substring(4);
+                if (l1.compareTo(l2) > 0) {
+                    modernos += 1;
+                } else if (l1.compareTo(l2) < 0) {
+                    antiguos += 1;
+                } else {
+                    n1 = Integer.valueOf(m1.substring(0, 4));
+                    n2 = Integer.valueOf(m2.substring(0, 4));
+                    if (n1 > n2) {
+                        modernos += 1;
+                    } else {
+                        antiguos += 1;
+                    }
+                }
+
+            }
+            bw.write(modernos + " " + antiguos + "\n");
+        }
+        bw.flush();
+    }
+}
