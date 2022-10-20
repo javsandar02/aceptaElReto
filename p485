@@ -1,0 +1,55 @@
+package ar485;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
+/**
+ *
+ * @author dario
+ */
+public class AR485 {
+
+    private static String readLine() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        byte c = (byte) System.in.read();
+        while (c != 32 && c != 10) {
+            sb.append((char) c);
+            c = (byte) System.in.read();
+        }
+        return sb.toString();
+    }
+
+    private static short[] getSum(short[] array) {
+        short sum = 0;
+        short[] arraySum = new short[array.length];
+        for (int i = array.length - 1; i >= 0; i--) {
+            sum += array[i];
+            arraySum[i] = sum;
+        }
+        return arraySum;
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        byte n;
+        short[] path;
+        short[] arraySum;
+        while ((n = Byte.valueOf(readLine())) > 0) {
+            path = new short[n];
+            for (int i = 0; i < n; i++) {
+                path[i] = Short.valueOf(readLine());
+            }
+            arraySum = getSum(path);
+            for (int i = 0; i < n; i++) {
+                bw.write(String.valueOf(arraySum[i]));
+                if (i+1 != n) {
+                    bw.write(" ");
+                }
+            }
+            bw.write("\n");
+        }
+        bw.flush();
+    }
+}
+
