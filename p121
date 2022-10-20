@@ -1,0 +1,44 @@
+package ar121;
+
+import java.util.Scanner;
+
+public class AR121 {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int chicles, envoltorios, regalo, contador;
+        int envoltoriosRestantes, chiclesAnterior;
+
+        while (true) {
+            envoltorios = in.nextInt();
+            regalo = in.nextInt();
+            chicles = in.nextInt();
+
+            // Según el enunciado se podría comprobar solo
+            // que los envoltorios sean cero.
+            if (envoltorios == 0 && regalo == 0 && chicles == 0) {
+                break;
+            }
+
+            if (regalo >= envoltorios && chicles >= envoltorios) {
+                System.out.println("RUINA");
+            } else if (regalo == 0) {
+                System.out.println(chicles + " " + chicles);
+            } else {
+                contador = 0;
+                envoltoriosRestantes = 0;
+                while ((chicles + envoltoriosRestantes) >= envoltorios) {
+                    contador += chicles;
+
+                    chiclesAnterior = chicles;
+                    chicles = (chicles + envoltoriosRestantes) / envoltorios * regalo;
+                    envoltoriosRestantes = (chiclesAnterior + envoltoriosRestantes) % envoltorios;
+                }
+                contador += chicles;
+                envoltoriosRestantes += chicles;
+                System.out.println(contador + " " + envoltoriosRestantes);
+            }
+        }
+    }
+
+}
