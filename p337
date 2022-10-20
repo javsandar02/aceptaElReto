@@ -1,0 +1,59 @@
+package ar337;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
+/**
+ *
+ * @author javsandar
+ */
+public class AR337 {
+
+    /**
+     * @param args the command line arguments
+     */
+    private static final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+    public static int readInt() throws IOException {
+        int n1 = System.in.read() - 48;
+        int n2 = System.in.read();
+        while (n2 != 10 && n2 != 32) {
+            n1 = n1 * 10 + (n2 - 48);
+            n2 = System.in.read();
+        }
+        return n1;
+    }
+
+    public static void main(String[] args) throws IOException {
+        int n = readInt();
+        boolean siEncajan;
+        int[] superiores;
+        int[] inferiores;
+        int sum;
+        for (int i = 0; i < n; i++) {
+            superiores = new int[6];
+            inferiores = new int[6];
+            for (int j = 0; j < superiores.length; j++) {
+                superiores[j] = readInt();
+            }
+            for (int j = 0; j < inferiores.length; j++) {
+                inferiores[j] = readInt();
+            }
+            siEncajan = true;
+            sum = superiores[0] + inferiores[0];
+            for (int j = 1; j < superiores.length; j++) {
+                if (sum != (superiores[j] + inferiores[j])) {
+                    siEncajan = false;
+                }
+            }
+
+            if (siEncajan) {
+                bw.write("SI\n");
+            } else {
+                bw.write("NO\n");
+            }
+        }
+        bw.flush();
+    }
+}
