@@ -1,0 +1,40 @@
+package ar112;
+
+import java.util.Scanner;
+
+public class Ar112 {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        final int KILOMETRO = 1000;
+        final int HORA = 3600;
+        double distancia;
+        double velMax;
+        double tiempo;
+        double velocidad;
+
+        while (true) {
+            distancia = in.nextInt();
+            velMax = in.nextInt();
+            tiempo = in.nextInt();
+            if (distancia == 0 && velMax == 0 && tiempo == 0) {
+                break;
+            }
+            distancia /= KILOMETRO;
+            tiempo /= HORA;
+            velocidad = distancia / tiempo;
+            if (distancia <= 0 || velMax <= 0 || tiempo <= 0) {
+                System.out.println("ERROR");
+            } else if(velocidad < velMax) {
+                System.out.println("OK");
+            } else if (velocidad < velMax * 1.20) {
+                System.out.println("MULTA");
+            } else {
+                System.out.println("PUNTOS");
+            }
+        }
+    }
+}
+
+(c) Acepta el reto, 2013 - 2022
+
