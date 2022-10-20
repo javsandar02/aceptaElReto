@@ -1,0 +1,41 @@
+package reunion.de.torres.pkg609;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Scanner;
+
+/**
+ *
+ * @author javsandar
+ */
+public class ReunionDeTorres609 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n, nTorres;
+        int[] x;
+        int[] y;
+        int pos = 0;
+        while(in.hasNext()){
+            n = in.nextInt();
+            nTorres = in.nextInt();
+            x = new int[nTorres];
+            y = new int[nTorres];
+            for (int i = 0; i < nTorres; i++) {
+            x[i] = in.nextInt();
+            y[i] = in.nextInt();
+            }
+            Arrays.sort(x);
+            Arrays.sort(y);
+            if (x.length % 2 == 0) {
+                pos = x.length/2-1;
+            } else {
+                pos = x.length/2;
+            }
+            System.out.println(x[pos] + " " + y[pos]);
+        }
+    }
+}
