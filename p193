@@ -1,0 +1,67 @@
+package ar193;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author javsandar
+ */
+public class AR193 {
+
+    /**
+     * @param args the command line arguments
+     */
+    private static int getReversedN(int n) {
+        int temp;
+        int nReverse;
+        nReverse = 0;
+        temp = n;
+        while (temp > 0) {
+            nReverse *= 10;
+            nReverse += temp % 10;
+            temp /= 10;
+        }
+        return nReverse;
+    }
+
+    private static int getDigits(int n) {
+        int temp = n;
+        int digits = 0;
+        while (temp > 0) {
+            temp /= 10;
+            digits++;
+        }
+        return digits;
+    }
+
+    private static boolean allDigitsAreOdd(int n) {
+        int odd = 0;
+        int temp = n;
+        while (temp > 0 && (temp % 10) % 2 != 0) {
+            temp /= 10;
+            odd++;
+        }
+        return odd == getDigits(n);
+        
+    }
+
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Scanner in = new Scanner(System.in);
+        int n;
+        int nSum;
+
+        while ((n = in.nextInt()) != 0) {
+            getReversedN(n);
+            getDigits(getReversedN(n));
+            nSum = n + getReversedN(n);
+            getDigits(nSum);
+            allDigitsAreOdd(nSum);
+            if (allDigitsAreOdd(nSum) && getDigits(n) == getDigits(getReversedN(n))) {
+                System.out.println("SI");
+            } else
+                System.out.println("NO");
+        }
+
+    }
+}
