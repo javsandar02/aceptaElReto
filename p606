@@ -1,0 +1,38 @@
+package el.precio.de.la.gasolina.pkg606;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+/**
+ *
+ * @author javsandar
+ */
+public class ElPrecioDeLaGasolina606 {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n;
+        int[] precios, crecientes;
+        while ((n = in.nextInt()) != 0) {
+            precios = new int[n];
+            crecientes = new int[n];
+            for (int i = 0; i < precios.length; i++) {
+                precios[i] = in.nextInt();
+            }
+            crecientes[0] = 1;
+            
+            for (int i = 1; i < precios.length; i++) {
+                int precioMax = 1;
+                for (int j = 0; j < i; j++) {
+                    if (precios[j] < precios[i]) precioMax = Math.max(precioMax, crecientes[j] + 1);
+                }
+                crecientes[i] = precioMax;
+            }
+            int mejorCreciente = 1;
+            for(int c: crecientes) mejorCreciente = Math.max(mejorCreciente, c);
+            
+            System.out.println(mejorCreciente);
+        }
+
+    }
+}
