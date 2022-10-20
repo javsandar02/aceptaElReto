@@ -1,0 +1,36 @@
+package ar165;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+public class AR165 {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int n, digitoPar, numeroDigitos;
+
+        while ((n = Integer.valueOf(br.readLine())) > -1) {
+
+            digitoPar = 0;
+            numeroDigitos = 0;
+            do {
+                if ((n % 10) % 2 == 0) {
+                    digitoPar++;
+                }
+                n /= 10;
+                numeroDigitos++;
+            } while (n != 0);
+            if (digitoPar == numeroDigitos) {
+                bw.write(String.valueOf("SI\n"));
+            } else {
+                bw.write(String.valueOf("NO\n"));
+            }
+        }
+        bw.flush();
+    }
+}
