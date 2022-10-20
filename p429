@@ -1,0 +1,73 @@
+package ar429;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Scanner;
+
+/**
+ *
+ * @author dario
+ */
+public class AR429 {
+
+    private static final Scanner in = new Scanner(System.in);
+    private static final BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+    private static String readLine() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int c = System.in.read();
+        while (c != 32 && c != 10) {
+            sb.append((char) c);
+            c = System.in.read();
+        }
+        return sb.toString();
+    }
+
+    private static int[] getArray(int[] array) throws IOException {
+        for (int i = 0; i < array.length; i++) {
+            array[i] = Integer.parseInt(readLine());
+        }
+        return array;
+    }
+
+    private static boolean sortArrays(int[] array1, int[] array2) {
+        int max;
+        for (int i = 0; i < array1.length; i++) {
+            max = 0;
+            for (int j = 0; j < array2.length; j++) {
+                if (array2[j] > array2[max]) {
+                    max = j;
+                }
+            }
+            array2[max] -= array1[i];
+        }
+        for (int i = 0; i < array2.length; i++) {
+            if (array2[i] < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) throws IOException {
+        short n1;
+        short n2;
+        while ((n1 = Short.parseShort(readLine())) != 0) {
+            int[] hangares = new int[n1];
+            getArray(hangares);
+
+            n2 = Short.parseShort(readLine());
+            int[] naves = new int[n2];
+            getArray(naves);
+
+            if (sortArrays(naves, hangares)) {
+                bw.write("SI\n");
+            } else {
+                bw.write("NO\n");
+            }
+        }
+        bw.flush();
+    }
+}
+
