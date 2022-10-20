@@ -1,0 +1,69 @@
+package ar238;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.LinkedList;
+
+/**
+ *
+ * @author javsandar
+ */
+public class AR238 {
+
+    public static int readInt() throws IOException {
+        int n1 = System.in.read() - 48;
+        int n2 = System.in.read();
+        while (n2 != 10 && n2 != 32) {
+            n1 = n1 * 10 + (n2 - 48);
+            n2 = System.in.read();
+        }
+        return n1;
+    }
+
+    public static void main(String[] args) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        LinkedList<Integer>[] reparto;
+        int billetes, ladrones, maxLadrones;
+        while ((billetes = readInt()) != 0 && (ladrones = readInt()) != 0) {
+            reparto = new LinkedList[ladrones];
+            maxLadrones = ladrones;
+            ladrones = 0;
+            // inicializar LinkedList
+            for (int i = 0; i < reparto.length; i++) {
+                reparto[i] = new LinkedList();
+            }
+            //repartir billetes
+            for (int i = 0; i < billetes; i++) {
+                reparto[ladrones].add(readInt());
+                ladrones = ++ladrones % maxLadrones;
+//                ladrones++;
+//                if (ladrones == maxLadrones) {
+//                    ladrones = 0;
+//                }
+            }
+//sumar
+            int pos = 0;
+            while (pos < maxLadrones) {
+                if (reparto[pos].isEmpty()) {
+                    bw.write("0:\n");
+                } else {
+                    int suma = 0;
+                    suma += reparto[pos].get(0);
+                    sb.append(reparto[pos].get(0));
+                    for (int i = 1; i < reparto[pos].size(); i++) {
+                        suma += reparto[pos].get(i);
+                        sb.append(" ");
+                        sb.append(reparto[pos].get(i));
+                    }
+                    bw.write(suma + ": " + sb + "\n");
+                    sb.setLength(0);
+                }
+                pos++;
+            }
+            bw.write("---\n");
+        }
+        bw.flush();
+    }
+}
