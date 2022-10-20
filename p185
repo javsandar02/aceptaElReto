@@ -1,0 +1,52 @@
+package potitos.pkg185;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Scanner;
+
+/**
+ *
+ * @author javsandar
+ */
+public class Potitos185 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+
+        int n;
+        String result;
+        while ((n = in.nextInt()) != 0) {
+            in.nextLine();
+            ArrayList<String> siGustan = new ArrayList();
+            ArrayList<String> noGustan = new ArrayList();
+            for (; n-- > 0;) {
+                String[] potito = in.nextLine().split(" ");
+                if (potito[0].equals("SI:")) {
+                    for (int i = 1; i < potito.length - 1; i++) {
+                        siGustan.add(potito[i]);
+                    }
+                } else {
+                    for (int i = 1; i < potito.length - 1; i++) {
+                        if (!noGustan.contains(potito[i])) {
+                            noGustan.add(potito[i]);
+                        }
+                    }
+                }
+            }
+            result = "";
+            Collections.sort(noGustan);
+            for (String noGustan1 : noGustan) {
+                if (!siGustan.contains(noGustan1)) {
+                    result += noGustan1+" ";
+                }
+            }
+            System.out.println(result.trim());
+        }
+    }
+
+}
