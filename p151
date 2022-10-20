@@ -1,0 +1,48 @@
+package ar151;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+/**
+ *
+ * @author dario
+ */
+public class AR151 {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n;
+        int[][] matriz;
+        boolean esIdentidad;
+        while ((n = in.nextInt()) != 0) {
+            esIdentidad = true;
+            matriz = new int[n][n];
+            // rellenar matriz
+            for (int fila = 0; fila < matriz.length; fila++) {
+                for (int col = 0; col < matriz[0].length; col++) {
+                    matriz[fila][col] = in.nextInt();
+                }
+            }
+            //es identidad
+            if (matriz[0][0] == 1) {
+                 for (int fila = 0; fila < matriz.length; fila++) {
+                     for (int col = 0; col < matriz[0].length; col++) {
+                         if ((fila == col && matriz[fila][col] != 1) || (fila != col && matriz[fila][col] != 0)) {
+                             esIdentidad = false;
+                             break;
+                         }
+                     }
+                }
+                if (esIdentidad) {
+                    System.out.println("SI");
+                } else {
+                    System.out.println("NO");
+                }
+            } else {
+                System.out.println("NO");
+            }
+        }
+
+    }
+
+}
