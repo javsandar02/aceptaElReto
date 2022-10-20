@@ -1,0 +1,35 @@
+package ar171;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Scanner;
+
+public class AR171 {
+
+    private static Scanner in = new Scanner(System.in);
+    private static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    private static int numAbadias(int[] picos) {
+        int abadias = 1;
+        int max = picos[picos.length - 1];
+        for (int i = picos.length - 2; i > -1; i--) {
+            if (picos[i] > max) {
+                max = picos[i];
+                abadias++;
+            }
+        }
+        return abadias;
+    }
+
+    public static void main(String[] args) throws IOException {
+        int casos;
+        while ((casos = in.nextInt()) > 0) {
+            int[] picos = new int[casos];
+            for (int i = 0; i < picos.length; i++) {
+                picos[i] = in.nextInt();
+            }
+            bw.write(String.valueOf(numAbadias(picos) + "\n"));
+        }
+        bw.flush();
+    }
+}
